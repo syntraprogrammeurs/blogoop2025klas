@@ -20,7 +20,7 @@ require_once("includes/content-top.php");
                     $result = $user->find_all_users();
 	               $fields = mysqli_fetch_fields($result);
 					foreach($fields as $field){
-                        echo "<th>" . htmlspecialchars($field->name, ENT_QUOTES, 'UTF-8') . "</th>";
+                        echo "<th>" . htmlspecialchars(str_replace('_', ' ', $field->name), ENT_QUOTES, 'UTF-8') . "</th>";
                     }
 
 	                ?>
@@ -32,12 +32,11 @@ require_once("includes/content-top.php");
                 </tr>
                 </thead>
                 <tbody>
-
                    <?php if(mysqli_num_rows($result)>0):?>
                      <?php while($row = mysqli_fetch_array($result)):?>
 	                   <tr>
 		                   <td><?= htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') ?></td>
-		                   <td><?= htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8') ?></td>
+		                   <td><span><img height="40" width="40" class="avatar me-3" src="../admin/assets/static/images/faces/8.jpg" alt=""></span><?= htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8') ?></td>
 		                   <td><?= htmlspecialchars($row['password'], ENT_QUOTES, 'UTF-8') ?></td>
 		                   <td><?= htmlspecialchars($row['first_name'], ENT_QUOTES, 'UTF-8') ?></td>
 		                   <td><?= htmlspecialchars($row['last_name'], ENT_QUOTES, 'UTF-8') ?></td
