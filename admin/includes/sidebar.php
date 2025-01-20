@@ -69,24 +69,7 @@
 
 
 	            </li>
-	            <li
-			            class="sidebar-item  has-sub">
-		            <a href="#" class='sidebar-link'>
-			            <i class="bi bi-people-fill"></i>
-			            <span>Posts</span>
-		            </a>
 
-		            <ul class="submenu ">
-			            <li class="submenu-item  ">
-				            <a href="posts.php" class="submenu-link">All Posts</a>
-			            </li>
-			            <li class="submenu-item  ">
-				            <a href="#" class="submenu-link">Add Post</a>
-			            </li>
-		            </ul>
-
-
-	            </li>
                 <li
                     class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
