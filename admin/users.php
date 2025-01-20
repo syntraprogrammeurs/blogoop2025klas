@@ -16,13 +16,14 @@ require_once("includes/content-top.php");
                 <tr>
 	                <?php
 	                //dynamisch kolommen ophalen uit database
-                    $user = new User();
-                    $result = $user->find_all_users();
-	               $fields = mysqli_fetch_fields($result);
-					foreach($fields as $field){
-                        echo "<th>" . htmlspecialchars(str_replace('_', ' ', $field->name), ENT_QUOTES, 'UTF-8') . "</th>";
-                    }
+//                    $user = new User();
+//                    $result = $user->find_all_users();
 
+	                  $result = User::find_all_users();
+		               $fields = mysqli_fetch_fields($result);
+						foreach($fields as $field){
+	                        echo "<th>" . htmlspecialchars(str_replace('_', ' ', $field->name), ENT_QUOTES, 'UTF-8') . "</th>";
+	                    }
 	                ?>
 <!--	                <th>Klantnr</th>-->
 <!--	                <th>username</th>-->
@@ -48,6 +49,31 @@ require_once("includes/content-top.php");
 
                 </tbody>
             </table>
+	        <?php
+                echo "ophalen van 1 users procedureel met array";
+				$result = User::find_user_by_id(1);
+				if(mysqli_num_rows($result)>0){
+					while($row = mysqli_fetch_array($result)){
+						echo "<br> id:".$row['id']." ".$row['username']."<br>";
+					}
+				}else{
+					echo "0 results";
+				}
+
+	        ?>
+
+	        <?php
+	            echo "object oriented van 1 user";
+				$result = User::find_user_by_id(1);
+				$user = new User();
+				$row = mysqli_fetch_assoc($result);
+				$user->id= $row['id'];
+				$user->username= $row['username'];
+				$user->password= $row['password'];
+				$user->first_name= $row['first_name'];
+				$user->last_name=$row['last_name'];
+	            echo "<br> id:" . $user->id . " : " . $user->username;
+	        ?>
         </div>
     </div>
 
