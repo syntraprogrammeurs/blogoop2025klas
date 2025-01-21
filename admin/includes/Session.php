@@ -5,6 +5,7 @@ class Session
     /*properties*/
     private $signed_in;
     public $user_id;
+    public $message;
 
     /*methods*/
     public function login($user){
@@ -30,12 +31,30 @@ class Session
     public function is_signed_in(){
         return $this->signed_in;
     }
+    public function message($msg=""){
+        if(!empty($msg)){
+            $_SESSION['message'] = $msg;
+        }else{
+            return $this->message;
+        }
+    }
+    private function check_message(){
+        if(isset($_SESSION['message'])){
+            $this->message = $_SESSION['message'];
+            unset($_SESSION['message']);
+        }else{
+            $this->message = "";
+        }
+    }
     /*constructors*/
     //automatisch starten van een session
     function __construct(){
         session_start();
         $this->check_the_login();
+        $this->check_message();
     }
+
+
 }
 $session = new Session();
 ?>

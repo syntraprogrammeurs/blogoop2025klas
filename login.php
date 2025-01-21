@@ -1,7 +1,9 @@
 <?php
 require_once("includes/header.php");
+
 ?>
 <?php
+	$the_message = "";
     if($session->is_signed_in()){
         header("location:index.php");
     }
@@ -15,7 +17,7 @@ require_once("includes/header.php");
 			$session->login($user_found);
 			header("location:admin/index.php");
 		}else{
-			echo "failed";
+			$the_message = "Your password and username FAILED!";
 		}
     }else{
 		$username = "";
@@ -31,7 +33,12 @@ require_once("includes/header.php");
                 </div>
                 <h1 class="auth-title">Log in.</h1>
                 <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
-
+	            <?php if(!empty($the_message)):?>
+		            <div class="alert alert-success alert-dismissible show fade">
+			            <?php echo $the_message; ?>
+			            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		            </div>
+				<?php endif; ?>
                 <form action="" method="post">
                     <div class="form-group position-relative has-icon-left mb-4">
                         <input type="text" class="form-control form-control-xl" placeholder="Username" name="username">
@@ -69,6 +76,8 @@ require_once("includes/header.php");
     </div>
 
 </div>
+<script src="./admin/assets/compiled/js/app.js"></script>
+
 </body>
 <?php ob_end_flush(); ?>
 </html>
