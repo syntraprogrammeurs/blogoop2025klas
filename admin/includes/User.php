@@ -9,6 +9,7 @@ class User
     public $password;
     public $first_name;
     public $last_name;
+
     //methods
     public static function find_this_query($sql, $values = []){
         global $database;
@@ -19,7 +20,6 @@ class User
         }
         return $the_object_array;
     }
-
     public static function instantie($result){
         $the_object = new self();
         foreach($result as $the_attribute => $value){
@@ -57,6 +57,56 @@ class User
         $the_result_array = self::find_this_query($sql,[$username,$password]);
 
         return !empty($the_result_array) ? array_shift($the_result_array) : false;
+    }
+
+    /* CRUD */
+    protected static $table_name = 'users';
+    /*properties als array voorzien*/
+    public function get_properties(){
+        return[
+            'id'=> $this->id,
+            'username'=>$this->username,
+            'password'=>$this->password,
+            'first_name'=>$this->first_name,
+            'last_name'=>$this->last_name
+        ];
+    }
+    public function create(){
+        global $database;
+        //tabelnaam ophalen
+        $table = static::$table_name;
+        //properties
+        $properties = $this->get_properties();
+        //verwijder de id uit de lijst van properties
+        if(array_key_exists('id',$properties)){
+            unset($properties['id']);
+        }
+        //waarden beschermen tegen sql injecties
+        $escaped_values = array_map([$database,'escape_string'], $properties);
+
+        //placeholders in prepared statements (?)
+        $placeholders = array_fill(0,count($properties), '?');
+
+        //een string van alle veldnamen gescheiden door komma's.
+        $fields_string = implode(',',array_keys($properties));
+
+        //datatypes string
+        $types_string = "";
+        foreach($properties as $value){
+            if(is_int($value)){
+                $types_string .= "i";
+            }elseif(is_float($value)){
+                $types_string .= "d";
+            }else{
+                $types_string .= "s";
+            }
+        }
+        //een volledig prepared sql statement
+        $sql = "INSERT INTO $table ($fields_string) VALUES (".implode(',',$placeholders).")";
+
+        //execute
+        $database->query($sql, $escaped_values);
+
     }
 
 }

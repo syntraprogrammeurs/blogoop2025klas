@@ -41,7 +41,7 @@ require_once("includes/header.php");
 				<?php endif; ?>
                 <form action="" method="post">
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="text" class="form-control form-control-xl" placeholder="Username" name="username">
+                        <input type="text" class="form-control form-control-xl" placeholder="Username" name="username" value="<?php echo htmlentities($username); ?>">
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
                         </div>
