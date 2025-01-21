@@ -35,7 +35,7 @@ class User
     }
 
     public static function find_all_users(){
-        return self::find_this_query("SELECT * FROM users");
+        return self::find_this_query("SELECT * FROM users ORDER BY id DESC");
     }
     public static function find_user_by_id($user_id){
         //binden van parameters= ($user_id)=PREPARED STATEMENTS

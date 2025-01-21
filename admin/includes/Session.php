@@ -14,6 +14,13 @@ class Session
             $this->signed_in = true;
         }
     }
+    public function get_logged_in_user() {
+        if ($this->user_id) { // Controleer of user_id in de sessie staat
+            return User::find_user_by_id($this->user_id);
+        }
+        return null; // Geen ingelogde gebruiker
+    }
+
     public function logout(){
         unset($_SESSION['user_id']);
         unset($this->user_id);
