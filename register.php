@@ -2,6 +2,7 @@
 require_once("includes/header.php");
 
 $the_message = "";
+
 if (isset($_SESSION['the_message'])) {
     $the_message = $_SESSION['the_message'];
     unset($_SESSION['the_message']); // Verwijder de melding na ophalen
@@ -15,6 +16,7 @@ if (isset($_POST['submit'])) {
 
     if ($user_found) {
         $the_message = "This user exists, please login!";
+
     } elseif ($password === $confirmpassword) {
         $user = new User();
         $user->username = trim($_POST['username']);
@@ -22,6 +24,7 @@ if (isset($_POST['submit'])) {
         $user->last_name = trim($_POST['last_name']);
         $user->password = trim($_POST['password']);
         $user->create();
+
         $the_message = "New user: " . $user->username . " was added to the Database, click below to login!";
 
         // Zet de boodschap in de sessie voor gebruik na redirect
@@ -32,6 +35,7 @@ if (isset($_POST['submit'])) {
         exit(); // Stop verdere uitvoering van het script
     }else{
         $the_message = "Paswords are not alike!";
+
     }
 }
 ?>
@@ -52,31 +56,31 @@ if (isset($_POST['submit'])) {
                 <?php endif; ?>
 				<form action="" method="post">
 					<div class="form-group position-relative has-icon-left mb-4">
-						<input type="text" class="form-control form-control-xl" placeholder="First Name" name="first_name">
+						<input type="text" class="form-control form-control-xl" placeholder="First Name" name="first_name" required>
 						<div class="form-control-icon">
 							<i class="bi bi-person"></i>
 						</div>
 					</div>
 					<div class="form-group position-relative has-icon-left mb-4">
-						<input type="text" class="form-control form-control-xl" placeholder="Last Name" name="last_name">
+						<input type="text" class="form-control form-control-xl" placeholder="Last Name" name="last_name" required>
 						<div class="form-control-icon">
 							<i class="bi bi-person"></i>
 						</div>
 					</div>
 					<div class="form-group position-relative has-icon-left mb-4">
-						<input type="text" class="form-control form-control-xl" placeholder="Username" name="username">
+						<input type="text" class="form-control form-control-xl" placeholder="Username" name="username" required>
 						<div class="form-control-icon">
 							<i class="bi bi-person"></i>
 						</div>
 					</div>
 					<div class="form-group position-relative has-icon-left mb-4">
-						<input type="password" class="form-control form-control-xl" placeholder="Password" name="password">
+						<input type="password" class="form-control form-control-xl" placeholder="Password" name="password" required>
 						<div class="form-control-icon">
 							<i class="bi bi-shield-lock"></i>
 						</div>
 					</div>
 					<div class="form-group position-relative has-icon-left mb-4">
-						<input type="password" class="form-control form-control-xl" placeholder="Confirm Password" name="confirmpassword">
+						<input type="password" class="form-control form-control-xl" placeholder="Confirm Password" name="confirmpassword" required>
 						<div class="form-control-icon">
 							<i class="bi bi-shield-lock"></i>
 						</div>
