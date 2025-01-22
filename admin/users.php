@@ -1,7 +1,7 @@
 <?php
 require_once("includes/header.php");
 require_once("includes/sidebar.php");
-require_once("includes/content-top.php");
+require_once("includes/content-top2.php");
 
 if(isset($_GET['delete'])){
 	//$_GET['delete'] = id
@@ -44,9 +44,12 @@ if(isset($_GET['delete'])){
 		                   <td><?= $user->password;?></td>
 		                   <td><?= $user->first_name;?></td>
 		                   <td><?= $user->last_name; ?></td>
-		                   <td>
+		                   <td class="d-flex justify-content-around">
 			                   <a href="users.php?delete=<?php echo $user->id; ?>" onclick="return confirm("weet je zeker dat je deze gebruiker wil verwijderen?")">
 				                   <i class="bi bi-trash text-danger"></i>
+			                   </a>
+			                   <a href="edit_user.php?id=<?php echo $user->id; ?>">
+			                   <i class="bi bi-eye text-primary"></i>
 			                   </a>
 		                   </td>
 	                   </tr>
@@ -62,7 +65,10 @@ if(isset($_GET['delete'])){
     </div>
 
 </section>
+<script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+<script src="assets/static/js/pages/simple-datatables.js"></script>
 <?php
-require_once("includes/widget.php");
+
+
 require_once("includes/footer.php");
 ?>
