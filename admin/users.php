@@ -5,7 +5,7 @@ require_once("includes/content-top2.php");
 
 if(isset($_GET['delete'])){
 	//$_GET['delete'] = id
-	$user = User::find_user_by_id($_GET['delete']);
+	$user = User::find_by_id($_GET['delete']);
 	if($user){
 		$user->delete();
 		header("location:users.php").
@@ -36,7 +36,7 @@ if(isset($_GET['delete'])){
                 </tr>
                 </thead>
                 <tbody>
-                    <?php $users = User::find_all_users(); ?>
+                    <?php $users = User::find_all(); ?>
                      <?php foreach($users as $user):?>
 	                   <tr>
 		                   <td><?= $user->id; ?></td>
@@ -56,11 +56,7 @@ if(isset($_GET['delete'])){
                      <?php endforeach;?>
                 </tbody>
             </table>
-<!--	        --><?php
-//	            echo "delete van een user";
-//				$user = User::find_user_by_id(5);
-//				$user->delete();
-//	        ?>
+
         </div>
     </div>
 
