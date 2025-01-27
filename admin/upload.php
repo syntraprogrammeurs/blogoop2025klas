@@ -14,7 +14,6 @@ if(isset($_POST['submit'])){
 	$photo->description = $_POST['description'];
 	$photo->set_file($_FILES['file']);
 }
-var_dump($photo);
 //hier gebeurd het wegschrijven van de data, (link) naar de database
 if($photo->save()){
 	$message ="Foto succesvol opgeladen!";
