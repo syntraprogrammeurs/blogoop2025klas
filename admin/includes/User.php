@@ -9,6 +9,7 @@ class User
     public $password;
     public $first_name;
     public $last_name;
+    protected static $table_name = 'users';
 
     //methods
     public static function find_this_query($sql, $values = []){
@@ -34,12 +35,12 @@ class User
         return array_key_exists($the_attribute, $object_properties);
     }
 
-    public static function find_all_users(){
-        return self::find_this_query("SELECT * FROM users ORDER BY id DESC");
+    public static function find_all(){
+        return self::find_this_query("SELECT * FROM ".self::$table_name." ORDER BY id DESC");
     }
-    public static function find_user_by_id($user_id){
+    public static function find_by_id($id){
         //binden van parameters= ($user_id)=PREPARED STATEMENTS
-        $result = self::find_this_query("SELECT * FROM users WHERE id=?",[$user_id]);
+        $result = self::find_this_query("SELECT * FROM ". self::$table_name." WHERE id=?",[$id]);
         return !empty($result) ? array_shift($result): false;
     }
 
@@ -49,7 +50,7 @@ class User
         $password = $database->escape_string($password);
 
         // select * from users where username = $username and password = $password
-        $sql = "SELECT * FROM users WHERE ";
+        $sql = "SELECT * FROM ". self::$table_name ." WHERE ";
         $sql .= "username = ? ";
         $sql .= "AND password = ?";
         $sql .= " LIMIT 1";
@@ -60,7 +61,7 @@ class User
     }
 
     /* CRUD */
-    protected static $table_name = 'users';
+
     /*properties als array voorzien*/
     public function get_properties(){
         return[
@@ -160,5 +161,10 @@ class User
         $params = [$escaped_id];
         $database->query($sql,$params);
     }
+
+    public function save(){
+        return isset($this->id) ?$this->update() : $this->create();
+    }
+
 
 }

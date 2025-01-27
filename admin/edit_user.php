@@ -34,14 +34,14 @@ require_once("includes/content-top.php");
 if(empty($_GET['id'])){
 	header("location:users.php");
 }
-$user = User::find_user_by_id($_GET['id']);
+$user = User::find_by_id($_GET['id']);
 
 if(isset($_POST['updateuser'])){
 	if($user){
 		$user->username = $_POST['username'];
 		$user->first_name = $_POST['first_name'];
 		$user->last_name = $_POST['last_name'];
-		$user->update();
+		$user->save();
 		header("location:users.php");
 	}
 }
