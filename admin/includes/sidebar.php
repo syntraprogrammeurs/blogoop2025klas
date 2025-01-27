@@ -66,8 +66,22 @@
 				            <a href="add_user.php" class="submenu-link">Add User</a>
 			            </li>
 		            </ul>
+	            </li>
+	            <li
+			            class="sidebar-item  has-sub">
+		            <a href="#" class='sidebar-link'>
+			            <i class="bi bi-film"></i>
+			            <span>Photos</span>
+		            </a>
 
-
+		            <ul class="submenu ">
+			            <li class="submenu-item  ">
+				            <a href="photos.php" class="submenu-link">All Photos</a>
+			            </li>
+			            <li class="submenu-item  ">
+				            <a href="upload.php" class="submenu-link">Upload Photo</a>
+			            </li>
+		            </ul>
 	            </li>
 
                 <li

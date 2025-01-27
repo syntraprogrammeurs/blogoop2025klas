@@ -56,11 +56,9 @@ if(isset($_GET['delete'])){
                      <?php endforeach;?>
                 </tbody>
             </table>
-<!--	        --><?php
-//	            echo "delete van een user";
-//				$user = User::find_user_by_id(5);
-//				$user->delete();
-//	        ?>
+			<?php
+				echo INCLUDES_PATH;
+			?>
         </div>
     </div>
 
