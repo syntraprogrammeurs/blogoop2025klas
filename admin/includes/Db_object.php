@@ -27,7 +27,8 @@ class Db_object
     }
 
     public static function find_all(){
-        return static::find_this_query("SELECT * FROM ".static::$table_name." ORDER BY id DESC");
+        $result = static::find_this_query("SELECT * FROM " . static::$table_name . " ORDER BY id DESC" );
+        return $result;
     }
     public static function find_by_id($id){
         //binden van parameters= ($user_id)=PREPARED STATEMENTS
@@ -46,6 +47,8 @@ class Db_object
         if(array_key_exists('id',$properties)){
             unset($properties['id']);
         }
+        //voeg een created_at timestamp aan de array van properties toe
+        $properties['created_at'] = date('Y-m-d H:i:s');
         //waarden beschermen tegen sql injecties
         $escaped_values = array_map([$database,'escape_string'], $properties);
 
@@ -125,8 +128,20 @@ class Db_object
         $params = [$escaped_id];
         $database->query($sql,$params);
     }
+    public function soft_delete(){
+        global $database;
+        $table = static::$table_name;
+        $escaped_id = $database->escape_string($this->id);
+        $current_timestamp = date('Y-m-d H:i:s');
+
+        $sql = "UPDATE $table SET deleted_at = '$current_timestamp' WHERE id = ?";
+        $params = [$escaped_id];
+        $database->query($sql,$params);
+    }
 
     public function save(){
         return isset($this->id) ?$this->update() : $this->create();
     }
+
+
 }

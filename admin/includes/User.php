@@ -9,6 +9,8 @@ class User extends Db_object
     public $password;
     public $first_name;
     public $last_name;
+    public $created_at;
+    public $deleted_at;
     protected static $table_name = 'users';
     //methods
 
@@ -36,7 +38,9 @@ class User extends Db_object
             'username'=>$this->username,
             'password'=>$this->password,
             'first_name'=>$this->first_name,
-            'last_name'=>$this->last_name
+            'last_name'=>$this->last_name,
+            'created_at'=>$this->created_at,
+            'deleted_at'=>$this->deleted_at
         ];
     }
 
