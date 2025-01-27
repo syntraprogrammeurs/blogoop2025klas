@@ -9,6 +9,8 @@ class Photo extends Db_object
     public $filename;
     public $size;
     public $type;
+    public $created_at;
+    public $deleted_at;
 
     public $tmp_path;
     public $upload_directory = "assets/images/photos";
@@ -99,6 +101,13 @@ class Photo extends Db_object
                 return false;
             }
 
+        }
+    }
+    public function picture_path(){
+        if($this->filename && file_exists($this->upload_directory.DS.$this->filename)){
+            return $this->upload_directory.DS.$this->filename;
+        }else{
+            return 'https://placehold.co/300';
         }
     }
 
