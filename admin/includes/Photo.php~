@@ -46,9 +46,7 @@ class Photo extends Db_object
             'description'=>$this->description,
             'filename'=>$this->filename,
             'size'=>$this->size,
-            'type'=>$this->type,
-            'created_at'=>$this->created_at,
-            'deleted_at'=>$this->deleted_at,
+            'type'=>$this->type
         ];
     }
     public function set_file($file){

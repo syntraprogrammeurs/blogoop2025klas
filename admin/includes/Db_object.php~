@@ -130,6 +130,7 @@ class Db_object
     }
     public function soft_delete(){
         global $database;
+
         $table = static::$table_name;
         $escaped_id = $database->escape_string($this->id);
         $current_timestamp = date('Y-m-d H:i:s');
@@ -144,6 +145,7 @@ class Db_object
         if (file_exists($file_path)) {
             unlink($file_path);
         }
+
     }
 
     public function save(){
