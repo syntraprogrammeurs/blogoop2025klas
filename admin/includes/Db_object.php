@@ -134,9 +134,16 @@ class Db_object
         $escaped_id = $database->escape_string($this->id);
         $current_timestamp = date('Y-m-d H:i:s');
 
+        //wissen in de database
         $sql = "UPDATE $table SET deleted_at = '$current_timestamp' WHERE id = ?";
         $params = [$escaped_id];
         $database->query($sql,$params);
+
+        //fysische foto wissen op de server
+        $file_path = $this->upload_directory.DS.$this->filename;
+        if(file_exists($file_path)){
+            unlink($file_path);
+        }
     }
 
     public function save(){

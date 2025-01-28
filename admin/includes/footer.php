@@ -19,6 +19,16 @@
 <!-- Need: Apexcharts -->
 <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
 <script src="assets/static/js/pages/dashboard.js"></script>
+<script src="./assets/js/jquery.js"></script>
+<script src="./assets/js/lightbox.min.js"></script>
+<script>
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+	    'fitImagesInViewport': true
+    })
+</script>
+
 <?php
 ob_end_flush();
 ?>

@@ -18,10 +18,12 @@ require_once("includes/content-top2.php");
                         <?php foreach ($photos as $photo): ?>
 		                    <div class="col-6 col-sm-6 col-lg-3 p-2">
 			                    <div class="position-relative" style="padding-top: 100%;">
-				                    <img class="position-absolute top-0 start-0 w-100 h-100 img-thumbnail" style="object-fit: cover;" src="<?= $photo->picture_path(); ?>">
-				                    <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2">
+				                    <a href="<?= $photo->picture_path(); ?>" data-lightbox="gallery">
+					                    <img class="position-absolute top-0 start-0 w-100 h-100 img-thumbnail" style="object-fit: cover;" src="<?= $photo->picture_path(); ?>">
+				                    </a>
+				                    <a class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" href="delete_photo.php?id=<?= $photo->id; ?>">
 					                    <i class="bi bi-trash"></i>
-				                    </button>
+				                    </a>
 			                    </div>
 		                    </div>
                         <?php endforeach; ?>
