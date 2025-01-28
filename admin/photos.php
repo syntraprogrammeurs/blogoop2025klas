@@ -19,7 +19,7 @@ require_once("includes/content-top2.php");
 		                    <div class="col-6 col-sm-6 col-lg-3 p-2">
 			                    <div class="position-relative" style="padding-top: 100%;">
 				                    <a href="<?= $photo->picture_path(); ?>" data-lightbox="gallery">
-					                    <img class="position-absolute top-0 start-0 w-100 h-100 img-thumbnail" style="object-fit: cover;" src="<?= $photo->picture_path(); ?>">
+					                    <img alt="<?= $photo->alternate_text; ?>" class="position-absolute top-0 start-0 w-100 h-100 img-thumbnail" style="object-fit: cover;" src="<?= $photo->picture_path(); ?>">
 				                    </a>
 				                    <div class="d-flex position-absolute top-0 end-0 mt-2 me-2">
 					                    <a class="btn btn-danger btn-sm me-1" href="delete_photo.php?id=<?= $photo->id; ?>">

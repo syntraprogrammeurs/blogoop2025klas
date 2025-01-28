@@ -103,7 +103,7 @@ if (empty($_GET['id'])) {
 								<i class="bi bi-file-image"></i> <strong>File type:</strong> <?php echo $photo->type; ?>
 							</li>
 							<li class="list-group-item">
-								<i class="bi bi-hdd"></i> <strong>File size:</strong> <?php echo ($photo->size) / 1024; ?> Kb
+								<i class="bi bi-hdd"></i> <strong>File size:</strong> <?php echo ($photo->size) / 1000; ?> Kb
 							</li>
 						</ul>
 					</div>
