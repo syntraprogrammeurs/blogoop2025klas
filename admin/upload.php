@@ -12,6 +12,7 @@ $photo = new Photo();
 if(isset($_POST['submit'])){
 	$photo->title = $_POST['title'];
 	$photo->description = $_POST['description'];
+    $photo->alternate_text = $_POST['alternate_text'];
 	$photo->set_file($_FILES['file']);
 }
 //hier gebeurd het wegschrijven van de data, (link) naar de database
@@ -43,6 +44,12 @@ if($photo->save()){
 							<div class="form-group">
 								<label for="description">Description</label>
 								<textarea class="form-control" name="description" id="description" rows="5" cols="100%" placeholder="description"></textarea>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<label for="alternate_text">Alternate Text</label>
+								<input type="text" class="form-control" name="alternate_text" id="alternate_text" rows="5" cols="100%" placeholder="alternate text"></input>
 							</div>
 						</div>
 						<div class="col-12">
