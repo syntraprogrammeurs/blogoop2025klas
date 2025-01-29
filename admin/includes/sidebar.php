@@ -83,6 +83,22 @@
 			            </li>
 		            </ul>
 	            </li>
+	            <li
+			            class="sidebar-item  has-sub">
+		            <a href="#" class='sidebar-link'>
+			            <i class="bi bi-newspaper"></i>
+			            <span>Blog</span>
+		            </a>
+
+		            <ul class="submenu ">
+			            <li class="submenu-item  ">
+				            <a href="blogs.php" class="submenu-link">All blogs</a>
+			            </li>
+			            <li class="submenu-item  ">
+				            <a href="add_blog.php" class="submenu-link">Add Blog</a>
+			            </li>
+		            </ul>
+	            </li>
 
                 <li
                     class="sidebar-item  has-sub">

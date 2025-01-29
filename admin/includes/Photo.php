@@ -28,7 +28,6 @@ class Photo extends Db_object
 
     ];
 
-
     /**
      * Retrieves the properties of the Photo object as an associative array.
      *
