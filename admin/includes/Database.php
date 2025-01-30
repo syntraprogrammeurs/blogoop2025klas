@@ -69,7 +69,9 @@ class Database
         }
         return $refs;
     }
-
+    public function get_last_insert_id() {
+        return mysqli_insert_id($this->connection);
+    }
 
     /* default constructor */
     function __construct(){

@@ -5,7 +5,8 @@ require_once("includes/header.php");
 require_once("includes/sidebar.php");
 require_once("includes/content-top2.php");
 
-// Controleer of er een 'delete' parameter in de URL is opgegeven
+
+//Controleer of er een 'delete' parameter in de URL is opgegeven
 if (isset($_GET['delete'])) {
     // Haal het blog op basis van het opgegeven ID
     $blog = Blog::find_by_id($_GET['delete']);
@@ -69,18 +70,21 @@ if (isset($_GET['delete'])) {
                         ?>
                         <?php foreach ($active_blogs as $blog): ?>
                             <?php
+
                             // Haal de bijbehorende auteur en foto op
-                            $author= User::find_by_id($blog->author_id);
+                            $author = User::find_by_id($blog->author_id);
                             $photo = Photo::find_by_id($blog->photo_id);
 
                             // Controleer of de blog actief is (niet verwijderd)
-                            if($blog->deleted_at == '0000-00-00 00:00:00'):
+                            if ($blog->deleted_at == '0000-00-00 00:00:00'):
                                 ?>
 								<tr>
 									<td><?= $blog->id; ?></td>
-									<td><span><img height="40" width="40" class="avatar me-3"
-									               src="<?php echo $photo->picture_path(); ?>"
-									               alt=""></span><?= $author->username; ?></td>
+									<td><span>
+        <img height="40" width="40" class="avatar me-3"
+             src="<?php echo $blog->photo_id != 0 ? $photo->picture_path() : 'https://placehold.co/40x40'; ?>"
+             alt="">
+    </span><?= $author->username; ?></td>
 									<td><?= $blog->title; ?></td>
 									<td><?= $blog->description; ?></td>
 									<td><?= $blog->created_at; ?></td>
@@ -122,18 +126,21 @@ if (isset($_GET['delete'])) {
                         ?>
                         <?php foreach ($inactive_blogs as $blog): ?>
                             <?php
+
                             // Haal auteur en foto op
-                            $author= User::find_by_id($blog->author_id);
+                            $author = User::find_by_id($blog->author_id);
                             $photo = Photo::find_by_id($blog->photo_id);
 
                             // Controleer of het blog verwijderd is
-                            if($blog->deleted_at !== '0000-00-00 00:00:00'):
+                            if ($blog->deleted_at !== '0000-00-00 00:00:00'):
                                 ?>
 								<tr>
 									<td><?= $blog->id; ?></td>
-									<td><span><img height="40" width="40" class="avatar me-3"
-									               src="<?php echo $photo->picture_path(); ?>"
-									               alt=""></span><?= $author->username; ?></td>
+									<td> <span>
+        <img height="40" width="40" class="avatar me-3"
+             src="<?php echo $blog->photo_id != 0 ? $photo->picture_path() : 'https://placehold.co/40x40'; ?>"
+             alt="">
+    </span><?= $author->username; ?></td>
 									<td><?= $blog->title; ?></td>
 									<td><?= $blog->description; ?></td>
 									<td><?= $blog->created_at; ?></td>
@@ -156,16 +163,9 @@ if (isset($_GET['delete'])) {
 					</table>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </section>
-
-<!-- Footer en scripts -->
-<!--<script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>-->
-<!--<script src="assets/static/js/pages/simple-datatables.js"></script>-->
-
 <?php
-// Inclusie van de footer
-require_once("includes/footer.php");
-?>
+require_once("includes/footer.php"); ?>
+

@@ -37,45 +37,59 @@ class Db_object
     }
 
     /* CRUD */
-    public function create(){
+    public function create() {
         global $database;
-        //tabelnaam ophalen
+
+        // Tabelnaam ophalen
         $table = static::$table_name;
-        //properties
+
+        // Properties
         $properties = $this->get_properties();
-        //verwijder de id uit de lijst van properties
-        if(array_key_exists('id',$properties)){
+
+        // ID verwijderen uit de lijst van properties
+        if (array_key_exists('id', $properties)) {
             unset($properties['id']);
         }
-        //voeg een created_at timestamp aan de array van properties toe
+
+        // Voeg een created_at timestamp toe
         $properties['created_at'] = date('Y-m-d H:i:s');
-        //waarden beschermen tegen sql injecties
-        $escaped_values = array_map([$database,'escape_string'], $properties);
 
-        //placeholders in prepared statements (?)
-        $placeholders = array_fill(0,count($properties), '?');
+        // Waarden beschermen tegen SQL-injecties
+        $escaped_values = array_map([$database, 'escape_string'], $properties);
 
-        //een string van alle veldnamen gescheiden door komma's.
-        $fields_string = implode(',',array_keys($properties));
+        // Placeholders in prepared statements
+        $placeholders = array_fill(0, count($properties), '?');
 
-        //datatypes string
+        // String van veldnamen gescheiden door komma's.
+        $fields_string = implode(',', array_keys($properties));
+
+        // Datatypes string
         $types_string = "";
-        foreach($properties as $value){
-            if(is_int($value)){
+        foreach ($properties as $value) {
+            if (is_int($value)) {
                 $types_string .= "i";
-            }elseif(is_float($value)){
+            } elseif (is_float($value)) {
                 $types_string .= "d";
-            }else{
+            } else {
                 $types_string .= "s";
             }
         }
-        //een volledig prepared sql statement
-        $sql = "INSERT INTO $table ($fields_string) VALUES (".implode(',',$placeholders).")";
 
-        //execute
-        $database->query($sql, $escaped_values);
+        // Voorbereide SQL-statement
+        $sql = "INSERT INTO $table ($fields_string) VALUES (" . implode(',', $placeholders) . ")";
 
+        // Query uitvoeren en resultaat controleren
+        $result = $database->query($sql, $escaped_values);
+
+        if ($result) {
+            return true;  // Succesvolle insert
+        } else {
+            return false;  // Mislukte insert
+        }
     }
+
+
+
 
     public function update(){
         global $database;

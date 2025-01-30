@@ -102,6 +102,8 @@ class Photo extends Db_object
             }
             if (move_uploaded_file($this->tmp_path, $target_path)) {
                 if ($this->create()) { // Database-insert
+                    global$database;
+                    $this->id = $database->get_last_insert_id(); // Gebruik de niet-statische methode
                     unset($this->tmp_path);
                     return true;
                 }
@@ -119,8 +121,6 @@ class Photo extends Db_object
             return 'https://placehold.co/300';
         }
     }
-
-
     // Deze methode verwijdert de oude afbeelding fysiek van de server.
     // Dit gebeurt alleen als er een bestand is gekoppeld aan het Photo-object.
     public function update_photo() {
