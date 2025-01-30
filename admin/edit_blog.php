@@ -48,7 +48,8 @@ if (isset($_POST['updateblog'])) {
                 $photo->save();
             }
             // Bijwerken van de $blog->photo_id eigenschap
-            $blog->photo_id = $photo->id;
+            global $database;
+            $blog->photo_id = $database->get_last_insert_id();
         }
         $blog->save();
         header("location: blogs.php");
