@@ -164,5 +164,11 @@ class Db_object
         return isset($this->id) ?$this->update() : $this->create();
     }
 
-    
+    public static function count_all(){
+        global $database;
+        $sql = "SELECT COUNT(*) FROM ". static::$table_name;
+        $result = $database->query($sql);
+        $row= $result->fetch_array();
+        return array_shift($row);
+    }
 }
