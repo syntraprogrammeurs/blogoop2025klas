@@ -33,6 +33,7 @@ if (isset($_SESSION['the_message'])) {
     unset($_SESSION['the_message']); // Verwijder de melding na ophalen
 }
 $photo = $blog->photo_id ? Photo::find_by_id($blog->photo_id) : null;
+
 if (isset($_POST['updateblog'])) {
     if ($blog) {
         $blog->title = trim($_POST['title']);
@@ -40,49 +41,37 @@ if (isset($_POST['updateblog'])) {
 
         // Controleer of er een nieuwe foto is geüpload
         if (!empty($_FILES['photo']['name'])) {
+            // Haal de bestaande foto op
             $photo = $blog->photo_id ? Photo::find_by_id($blog->photo_id) : null;
 
-            // Verwijder de oude afbeelding
+            // Verwijder de bestaande foto uit de images directory
             if ($photo) {
                 $photo->update_photo();
             }
 
-            // Voeg een nieuwe afbeelding toe
+            // Werk de bestaande foto bij met de nieuwe foto
             if ($photo) {
                 $photo->title = trim($_POST['title']);
                 $photo->description = trim($_POST['description']);
                 $photo->set_file($_FILES['photo']);
                 $photo->save();
             } else {
+                // Maak een nieuwe foto aan als er geen bestaande foto is
                 $photo = new Photo();
                 $photo->title = trim($_POST['title']);
                 $photo->description = trim($_POST['description']);
                 $photo->set_file($_FILES['photo']);
                 $photo->save();
             }
-
-            // Update de foto ID in de blog
+            // Bijwerken van de $blog->photo_id eigenschap
             global $database;
             $blog->photo_id = $database->get_last_insert_id();
         }
-
-        // **Update de blogpost**
-        if ($blog->save() == false) {
-            // **Update de categorieën in de tussentabel**
-            if (!empty($_POST['categories']) && is_array($_POST['categories'])) {
-                $blog->save_categories($_POST['categories']); // Oproepen van de verbeterde functie
-            }
-
-            $_SESSION['the_message'] = "Blogpost en categorieën succesvol bijgewerkt.";
-        } else {
-            $_SESSION['the_message'] = "Er is een fout opgetreden bij het updaten.";
-        }
-
+        $blog->save();
         header("location: blogs.php");
         exit();
     }
 }
-
 ?>
 
 <div class="card">

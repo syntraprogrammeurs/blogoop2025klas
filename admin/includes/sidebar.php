@@ -99,7 +99,22 @@
 			            </li>
 		            </ul>
 	            </li>
+                <li
+                        class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-tags"></i>
+                        <span>Categories</span>
+                    </a>
 
+                    <ul class="submenu ">
+                        <li class="submenu-item  ">
+                            <a href="categories.php" class="submenu-link">All Categories</a>
+                        </li>
+                        <li class="submenu-item  ">
+                            <a href="add_category.php" class="submenu-link">Add Category</a>
+                        </li>
+                    </ul>
+                </li>
                 <li
                     class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
