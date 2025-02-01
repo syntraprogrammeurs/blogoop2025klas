@@ -15,7 +15,12 @@ if (!$blog) {
     header("location: blogs.php"); // Redirect als het blog niet bestaat
     exit();
 }
-
+//// Controleer of er een melding in de sessie staat
+$the_message = "";
+if (isset($_SESSION['the_message'])) {
+    $the_message = $_SESSION['the_message'];
+    unset($_SESSION['the_message']); // Verwijder de melding na ophalen
+}
 $photo = $blog->photo_id ? Photo::find_by_id($blog->photo_id) : null;
 
 if (isset($_POST['updateblog'])) {

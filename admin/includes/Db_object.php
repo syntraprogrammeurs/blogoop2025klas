@@ -164,5 +164,5 @@ class Db_object
         return isset($this->id) ?$this->update() : $this->create();
     }
 
-
+    
 }
